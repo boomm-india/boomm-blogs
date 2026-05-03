@@ -1,0 +1,48 @@
+backend:
+  name: github
+  repo: boomm-india/boomm-blogs
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "blogs"
+    label: "Blogs"
+    folder: "content/blogs"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+      - { label: "Slug", name: "slug", widget: "string" }
+
+      - { label: "Description", name: "description", widget: "text" }
+
+      - { label: "Date", name: "date", widget: "datetime" }
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - investing
+          - markets
+          - crypto
+          - personal-finance
+
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+      - { label: "Cover Image (S3 URL)", name: "image", widget: "string" }
+
+      - label: "Topics"
+        name: "topics"
+        widget: "select"
+        multiple: true
+        options:
+          - college-lifestyle
+          - du-confessions
+          - self-doubt-finance
+          - investing-basics
+
+      - { label: "Body", name: "body", widget: "markdown" }
