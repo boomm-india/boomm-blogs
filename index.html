@@ -3,29 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <title>Boomm Blogs CMS</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body style="font-family: sans-serif; text-align: center; padding: 40px">
     <h2>Boomm Blogs CMS</h2>
     <p>Redirecting to admin...</p>
 
     <script>
-      if (window.netlifyIdentity) {
-        const hash = window.location.hash;
-
-        if (
-          hash &&
-          (hash.includes("confirmation_token") ||
-            hash.includes("invite_token") ||
-            hash.includes("recovery_token"))
-        ) {
-          window.netlifyIdentity.open();
-        }
-      }
-
-      setTimeout(() => {
-        window.location.href = "/admin/";
-      }, 1000);
+      // Simple redirect to CMS admin
+      window.location.replace("/admin/");
     </script>
   </body>
 </html>
