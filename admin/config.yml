@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: boomm-india/boomm-blogs
   branch: main
 
 media_folder: "public/uploads"
