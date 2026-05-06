@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: boomm-india/boomm-blogs
+  name: git-gateway
   branch: main
 
 media_folder: "public/uploads"
@@ -21,15 +20,6 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
 
       - { label: "Date", name: "date", widget: "datetime" }
-
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options:
-          - investing
-          - markets
-          - crypto
-          - personal-finance
 
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
 
