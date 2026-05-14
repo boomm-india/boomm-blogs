@@ -22,7 +22,6 @@
 
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
-          // Handle invite / confirmation / recovery tokens only after Identity initializes
           const hash = window.location.hash;
 
           if (hash) {
@@ -33,7 +32,7 @@
 
             // Password reset flow
             if (hash.includes("recovery_token")) {
-              window.netlifyIdentity.open("recovery");
+              window.netlifyIdentity.open("login");
             }
 
             // Email confirmation flow
