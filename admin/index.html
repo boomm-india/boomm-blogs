@@ -22,32 +22,32 @@
 
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
+          // Handle invite / confirmation / recovery tokens only after Identity initializes
+          const hash = window.location.hash;
+
+          if (hash) {
+            // Invite flow → show signup/password creation screen
+            if (hash.includes("invite_token")) {
+              window.netlifyIdentity.open("signup");
+            }
+
+            // Password reset flow
+            if (hash.includes("recovery_token")) {
+              window.netlifyIdentity.open("recovery");
+            }
+
+            // Email confirmation flow
+            if (hash.includes("confirmation_token")) {
+              window.netlifyIdentity.open("login");
+            }
+          }
+
           if (!user) {
             window.netlifyIdentity.on("login", () => {
               document.location.href = "/admin/";
             });
           }
         });
-
-        // Handle invite / confirmation / recovery tokens
-        const hash = window.location.hash;
-
-        if (hash) {
-          // Invite flow → show signup/password creation screen
-          if (hash.includes("invite_token")) {
-            window.netlifyIdentity.open("signup");
-          }
-
-          // Password reset flow
-          if (hash.includes("recovery_token")) {
-            window.netlifyIdentity.open("recovery");
-          }
-
-          // Email confirmation flow
-          if (hash.includes("confirmation_token")) {
-            window.netlifyIdentity.open("login");
-          }
-        }
 
         // Smooth auth flow after signup / confirm
         window.netlifyIdentity.on("signup", () => {

@@ -9,7 +9,8 @@
     <p>Redirecting to admin...</p>
 
     <script>
-      window.location.replace("/admin/");
+      const hash = window.location.hash || "";
+      window.location.replace(`/admin/${hash}`);
     </script>
   </body>
 </html>
