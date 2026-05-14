@@ -32,13 +32,21 @@
         // Handle invite / confirmation / recovery tokens
         const hash = window.location.hash;
 
-        if (
-          hash &&
-          (hash.includes("confirmation_token") ||
-            hash.includes("invite_token") ||
-            hash.includes("recovery_token"))
-        ) {
-          window.netlifyIdentity.open();
+        if (hash) {
+          // Invite flow → show signup/password creation screen
+          if (hash.includes("invite_token")) {
+            window.netlifyIdentity.open("signup");
+          }
+
+          // Password reset flow
+          if (hash.includes("recovery_token")) {
+            window.netlifyIdentity.open("recovery");
+          }
+
+          // Email confirmation flow
+          if (hash.includes("confirmation_token")) {
+            window.netlifyIdentity.open("login");
+          }
         }
 
         // Smooth auth flow after signup / confirm
@@ -48,6 +56,16 @@
 
         window.netlifyIdentity.on("confirm", () => {
           window.netlifyIdentity.open("login");
+        });
+
+        // After password recovery, redirect back to admin
+        window.netlifyIdentity.on("recovery", () => {
+          document.location.href = "/admin/";
+        });
+
+        // After logout, stay on admin login screen
+        window.netlifyIdentity.on("logout", () => {
+          document.location.href = "/admin/";
         });
       }
     </script>
