@@ -6,6 +6,16 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 collections:
+  - name: "topics"
+    label: "Topics"
+    hide: true
+    files:
+      - file: "admin/topics.json"
+        name: "topics"
+        label: "Topics"
+        fields:
+          - { label: "Topics", name: "topics", widget: "hidden", default: [] }
+
   - name: "blogs"
     label: "Blogs"
     folder: "content/blogs"
@@ -15,24 +25,40 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
 
-      - { label: "Slug", name: "slug", widget: "string" }
+      - {
+        label: "Slug",
+        name: "slug",
+        widget: "string",
+        required: false,
+        hint: "Auto-generated from title if left empty"
+      }
 
       - { label: "Description", name: "description", widget: "text" }
 
       - { label: "Date", name: "date", widget: "datetime" }
 
-      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - {
+          label: "Priority Score",
+          name: "score",
+          widget: "number",
+          default: 50,
+          min: 0,
+          max: 100,
+          value_type: "int"
+        }
 
-      - { label: "Cover Image (S3 URL)", name: "image", widget: "string" }
+      - { label: "Cover Image", name: "image", widget: "image" }
 
       - label: "Topics"
         name: "topics"
-        widget: "select"
+        widget: "relation"
+        collection: "topics"
+        file: "topics"
+        search_fields: ["topics.*.name", "topics.*.slug"]
+        value_field: "topics.*.slug"
+        display_fields: ["topics.*.name"]
         multiple: true
-        options:
-          - college-lifestyle
-          - du-confessions
-          - self-doubt-finance
-          - investing-basics
 
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+
+      - { label: "Content", name: "content", widget: "markdown" }

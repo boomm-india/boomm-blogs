@@ -1,0 +1,20 @@
+{
+  "topics": [
+    {
+      "name": "Memes",
+      "slug": "memes"
+    },
+    {
+      "name": "Spending",
+      "slug": "spending"
+    },
+    {
+      "name": "Money",
+      "slug": "money"
+    },
+    {
+      "name": "Investing",
+      "slug": "investing"
+    }
+  ]
+}
